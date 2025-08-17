@@ -77,8 +77,8 @@ public class Carburant {
     @Override
     public String toString() {
        return "Identifiant: " + this.identifiant +
-                "/nNomCarburant: " + nomCarburant + "/nPrix: " +
-                prix + "/nNiveau d'alerte" + niveauAlerte + "/nQuantite: " + quantite ;
+                "/nNomCarburant: " + this.nomCarburant + "/nPrix: " +
+                this.prix + "/nNiveau d'alerte" + this.niveauAlerte + "/nQuantite: " + this.quantite ;
     }
 
 

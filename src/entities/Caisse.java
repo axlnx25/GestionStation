@@ -1,5 +1,7 @@
 package entities;
 
 public class Caisse {
-//    implementation en cours ...
+    private static int totalDesEntree;
+    private static int totalDesSortes;
+
 }

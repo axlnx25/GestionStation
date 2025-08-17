@@ -53,6 +53,7 @@ public class Stock {
         if (stock.isEmpty()) {
             System.out.println("Stock vide");
         }  else {
+            System.out.println("Voici la liste des produits du stock :");
             for (Carburant carburant : stock.values()) {
 //                avertissement concernant niveau stock / alerte
                 if (carburant.getQuantite() < carburant.getNiveauAlerte()) {
@@ -141,6 +142,30 @@ public class Stock {
         }
     }
 
+    //    obtenir prixUnitaire d'un produit du stock
+    public static double getItemPrice (String itemName) {
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+                return carburant.getPrix();
+            }
+        }
+        return 0.0;
+    }
+
+    public static boolean estDansStock (String itemName) {
+        int i = 0;
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+               i++;
+            }
+        }
+        if (i == 0) {
+            return false;
+        } else  {
+            return true;
+        }
+    }
+
 
 ////    Obtenir les valeur/prixtotal et quantite total du stock
 //
@@ -175,13 +200,15 @@ public class Stock {
 
 //    incrementer la valeur de quantite et valeur/prix de stock lors de l'approvisionnement
 
-    public static double synchroniserAvecApprovisionnementQuantite (int idProduit) {
-        Carburant carburant = stock.get(idProduit);
-        return carburant.getQuantite();
-    }
+//    public static double synchroniserAvecApprovisionnementQuantite (int idProduit) {
+//        Carburant carburant = stock.get(idProduit);
+//        return carburant.getQuantite();
+//    }
+//
+//    public static double synchroniserAvecApprovisionnementPrix (int idProduit) {
+//        Carburant carburant = stock.get(idProduit);
+//        return carburant.getPrix();
+//    }
 
-    public static double synchroniserAvecApprovisionnementPrix (int idProduit) {
-        Carburant carburant = stock.get(idProduit);
-        return carburant.getPrix();
-    }
+
 }

@@ -1,5 +1,91 @@
 package entities;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 public class ListeFournisseur {
-    //    gerer l'historique des fournisseur à implementer, en cours ...
+    private static Map<Integer, Fournisseur> historiqueFournisseur;
+
+    public ListeFournisseur() {
+        historiqueFournisseur = new HashMap<>();
+    }
+
+    public static Map<Integer, Fournisseur> getHistoriqueFournisseur() {
+        return historiqueFournisseur;
+    }
+
+    public static void ajouterAListeFournisseur () {
+        Fournisseur f = new Fournisseur();
+        historiqueFournisseur.put(f.getIdentifiantFournisseur(), f);
+    }
+
+    public static void supprimerFournisseur (int id) {
+        if (historiqueFournisseur.isEmpty()) {
+            System.out.println("Liste fournisseur vide ");
+        } else {
+            if (historiqueFournisseur.containsKey(id)) {
+                historiqueFournisseur.remove(id);
+            } else  {
+                System.out.println("Ce fournisseur n'existe pas ");
+            }
+        }
+    }
+
+    public static void modifierFournisseur (int id) {
+        if (historiqueFournisseur.isEmpty()) {
+            System.out.println("Liste fournisseur vide ");
+        } else {
+            if (historiqueFournisseur.containsKey(id)) {
+                Scanner sc = new Scanner(System.in);
+                Fournisseur f = historiqueFournisseur.get(id);
+//                afficher les anciennes données avant de modifier
+                System.out.println("-----------------------------------");
+                System.out.println("Données actuelles de " + f.getNomFournisseur());
+                System.out.println(f);
+                System.out.println("-----------------------------------");
+
+                System.out.print("Modifier id fournisseur : ");
+                f.setIdentifiantFournisseur(sc.nextInt());
+                System.out.print("Modifier nom fournisseur : ");
+                f.setNomFournisseur(sc.next());
+                System.out.print("Modifier prenom fournisseur : ");
+                f.setPrenomFournisseur(sc.next());
+                System.out.println("Modifier adresse fournisseur : ");
+                f.setAdresseFournisseur(sc.next());
+                System.out.println("Modifier telephone fournisseur : ");
+                f.setTelephoneFournisseur(sc.next());
+
+            } else  {
+                System.out.println("Ce fournisseur n'existe pas ");
+            }
+        }
+    }
+
+    public static void afficherTousLesFournisseurs () {
+        if (historiqueFournisseur.isEmpty()) {
+            System.out.println("Liste fournisseur vide ");
+        } else {
+            System.out.println("Liste fournisseurs ");
+            for (Fournisseur f : historiqueFournisseur.values()) {
+                System.out.println("----------------------------------------");
+                System.out.println(f);
+                System.out.println("----------------------------------------");
+            }
+        }
+    }
+
+    public static boolean estDansLaListeFournisseur (String nomFournisseur) {
+        int i = 0;
+        for (Fournisseur f : historiqueFournisseur.values()) {
+            if (f.getNomFournisseur().equalsIgnoreCase(nomFournisseur)) {
+                i++;
+            }
+        }
+        if (i == 0) {
+            return false;
+        } else  {
+            return true;
+        }
+    }
 }

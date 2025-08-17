@@ -1,7 +1,5 @@
 package entities;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Approvisionnement {
@@ -10,46 +8,138 @@ public class Approvisionnement {
     private String date;
     private String nomFournisseur;
     private String nomProduit;
+    private double quantitApprovisionne;
 
     public void faireApprovisionnement() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Entrez id d'approvisionnement: " );
-        this.identifiant = sc.nextInt();
-        System.out.print("Entrez libelle d'approvisionnement: " );
-        this.libelle = sc.next();
-        System.out.print("Entrez date: " );
-        this.date = sc.next();
-        System.out.print("Entrez nom du fournisseur: " );
-        this.nomFournisseur = sc.next();
-        System.out.println("Entrez nom produit: ");
-        this.nomProduit = sc.next();
+//        L'approvisionnement ne se fait que quand il y'a au moins un fourniseur
+        if (ListeFournisseur.getHistoriqueFournisseur().isEmpty()) {
+            System.out.println("Impossible d'approvisionner car Liste fournisseur vide !!! " +
+                    "Veuillez ajouter au moins un fournisseur ");
+        } else {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Entrez id d'approvisionnement: " );
+            this.identifiant = sc.nextInt();
+            System.out.print("Entrez libelle d'approvisionnement: " );
+            this.libelle = sc.next();
+            System.out.print("Entrez date: " );
+            this.date = sc.next();
+            System.out.print("Entrez quantite approvisionée: ");
+            this.quantitApprovisionne = sc.nextDouble();
+
+//        Pour que l'utilisateur entre un nom de fournisseur dans la liste
+            while (true) {
+                ListeFournisseur.afficherTousLesFournisseurs();
+                System.out.print("Entrez nom du fournisseur ( choisir dans la liste," +
+                        " Si elle est vide aller enregistrer un fournisseur ): " );
+                String choisir = sc.next();
+                if (ListeFournisseur.estDansLaListeFournisseur(choisir)) {
+                    this.nomFournisseur = choisir;
+                    break;
+                }
+            }
+
+//            L'approvisionement est fait pour un produit deja enrgistreé
+            while (true) {
+                Stock.afficherStock();
+                System.out.print("Entrez nom produit approvisionner ( choisir dans la liste ): ");
+                String choisir = sc.next();
+                if (Stock.estDansStock(choisir)) {
+                    this.nomProduit = choisir;
+                }
+            }
+        }
+
     }
 
+    public int getIdentifiant() {
+        return identifiant;
+    }
+
+    public double getQuantitApprovisionne() {
+        return quantitApprovisionne;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getNomFournisseur() {
+        return nomFournisseur;
+    }
+
+    public String getNomProduit() {
+        return nomProduit;
+    }
+
+    public void setQuantitApprovisionne(double quantitApprovisionne) {
+        this.quantitApprovisionne = quantitApprovisionne;
+    }
+
+    public void setIdentifiant(int identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public void setLibelle(String libelle) {
+        this.libelle = libelle;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setNomFournisseur(String nomFournisseur) {
+        this.nomFournisseur = nomFournisseur;
+    }
+
+    public void setNomProduit(String nomProduit) {
+        this.nomProduit = nomProduit;
+    }
+
+//    methode qui calcule la valeur prix de l'approvisionnement en cours et la retourne
+//    pour incremanter la valeur prix du stock
+    public double valeurApprovisionnementEncours () {
+        return Stock.getItemPrice(this.nomProduit) * this.quantitApprovisionne;
+    }
+
+//    methode a appeler dans le menu apres nouvelle approvisionnement
     public void miseAJourStock() {
 //        trouver l'id du produit par son nom pour modifier son stock (valeur quantite) dans stock general
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                augmenter quantite apres approvisionnement
                 Stock.setTotalQuantiteStock(Stock.gettotalQuantiteStock() +
-                        Stock.synchroniserAvecApprovisionnementQuantite(carburant.getIdentifiant()));
+                        this.valeurApprovisionnementEncours());
 //                augmenter valeur prix apres approvisionnement
                 Stock.setTotalValeurStock(Stock.gettotalValeurStock() +
-                        Stock.synchroniserAvecApprovisionnementPrix(carburant.getIdentifiant()));
+                        this.getQuantitApprovisionne());
             }
         }
     }
 
+//    methode appeler lors de la suppression d'un approvisionnement
     public void annulerApprovisionnement() {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                soustraire quantite apres annuler approvisionnement
                 Stock.setTotalQuantiteStock(Stock.gettotalQuantiteStock() -
-                        Stock.synchroniserAvecApprovisionnementQuantite(carburant.getIdentifiant()));
+                        this.valeurApprovisionnementEncours());
 //                soustraire valeur prix apres annuler approvisionnement
                 Stock.setTotalValeurStock(Stock.gettotalValeurStock() -
-                        Stock.synchroniserAvecApprovisionnementPrix(carburant.getIdentifiant()));
+                        this.getQuantitApprovisionne());
             }
         }
+    }
+
+    public String toString () {
+        return "Identifiant d'approvisionnement: " + this.identifiant + "/nLibelle: " + this.libelle
+                + "/nDate: " + this.date + "/nNom du fournisseur: " + this.nomFournisseur
+                + "/nNom du produit approvisionné: " + this.nomProduit
+                + "/nValeur (prix) approvisionnée: " + this.valeurApprovisionnementEncours() +
+                "/nQuantite approvisionnée: " + this.quantitApprovisionne;
     }
 
 
