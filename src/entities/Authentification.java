@@ -1,7 +1,7 @@
 package entities;
 import java.util.*;
 
-class Authentification {
+public class Authentification {
     private final String username = "admin";   // identifiant par défaut
     private final String password = "545";    // mot de passe par défaut
     private boolean estConnecte = false;

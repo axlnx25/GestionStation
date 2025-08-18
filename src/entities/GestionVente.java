@@ -3,11 +3,10 @@ import java.util.*;
 
 public class GestionVente {
     private static ArrayList<Vente> ventes = new ArrayList<>();
-    private Scanner sc = new Scanner(System.in);
     Stock stock = new Stock();
 
     // 1. Nouvelle vente
-    public void nouvelleVente() {
+    public void nouvelleVente(Scanner sc) {
         if (stock.getStock().size() < 1) {
             System.out.println("Le stock n'existe pas veuillez enregistrez un produit ");
         } else {
@@ -65,7 +64,7 @@ public class GestionVente {
 
 
     // 3. Annuler une vente
-    public void annulerVente() {
+    public void annulerVente(Scanner sc) {
         if (!ventes.isEmpty()) {
             historique();
             System.out.print("Entrez l'ID de la vente à annuler ( choisir un ID dans la liste ): ");
