@@ -58,6 +58,9 @@ public class Main  {
             System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
+            if (reponse == 0) {
+                break;
+            }
         }
 
     }
@@ -67,7 +70,7 @@ public class Main  {
         int reponse = 1;
         Scanner sc = new Scanner(System.in);
 
-        while ( reponse == 0 ) {
+        while ( reponse == 1 ) {
             System.out.println("1. SAISIR PRODUIT");
             System.out.println("2. SUPPRIMER PRODUIT");
             System.out.println("3. MODIFIER PRODUIT");
@@ -113,6 +116,9 @@ public class Main  {
             System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
+            if (reponse == 0) {
+                break;
+            }
         }
 
     }
@@ -156,6 +162,9 @@ public class Main  {
             System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
+            if (reponse == 0) {
+                break;
+            }
         }
 
     }
@@ -193,6 +202,9 @@ public class Main  {
             System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
+            if (reponse == 0) {
+                break;
+            }
         }
 
     }
@@ -228,6 +240,9 @@ public class Main  {
             System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
+            if (reponse == 0) {
+                break;
+            }
         }
     }
 
