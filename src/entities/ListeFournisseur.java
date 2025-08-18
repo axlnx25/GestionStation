@@ -5,11 +5,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ListeFournisseur {
-    private static Map<Integer, Fournisseur> historiqueFournisseur;
-
-    public ListeFournisseur() {
-        historiqueFournisseur = new HashMap<>();
-    }
+    private static Map<Integer, Fournisseur> historiqueFournisseur =  new HashMap<>();
 
     public static Map<Integer, Fournisseur> getHistoriqueFournisseur() {
         return historiqueFournisseur;

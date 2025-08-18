@@ -85,6 +85,8 @@ public class GestionVente {
                 }
             }
             System.out.println(" Vente introuvable !");
+        } else {
+            System.out.println("Pas de ventes ");
         }
     }
 

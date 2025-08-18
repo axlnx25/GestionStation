@@ -88,13 +88,13 @@ public class Main  {
                 case 1: Carburant item = new Carburant();
                     stock.ajouterAuStock(item);
                     break;
-                case 2: stock.afficherProduitPourVente();
+                case 2:
                     System.out.print("Entrez ID du produit à supprimer ( choisir dans la liste ): ");
                     int id = sc.nextInt();
                     sc.nextLine();
                     stock.supprimerDuStock(id);
                     break;
-                case 3: stock.afficherProduitPourVente();
+                case 3:
                     System.out.print("Entrez ID du produit à modifier ( choisir dans la liste ): ");
                     int id3 = sc.nextInt();
                     sc.nextLine();
@@ -102,7 +102,8 @@ public class Main  {
                     break;
                 case 4: stock.afficherStock();
                     break;
-                case 5: a.faireApprovisionnement();
+                case 5:
+                    a.faireApprovisionnement();
                     ListeApprovisionnement.ajouterApprovisionnement(a);
                     a.miseAJourStock();
                     break;
@@ -142,12 +143,12 @@ public class Main  {
                 case 1: Fournisseur f = new Fournisseur();
                     ListeFournisseur.ajouterAListeFournisseur(f);
                     break;
-                case 2: ListeFournisseur.afficherTousLesFournisseurs();
+                case 2:
                     System.out.print("Entrez ID du Fournisseur à supprimer ( choisir dans la liste ): ");
                     int id = sc.nextInt();
                     ListeFournisseur.supprimerFournisseur(id);
                     break;
-                case 3: ListeFournisseur.afficherTousLesFournisseurs();
+                case 3:
                     System.out.print("Entrez ID du Fournisseur à modifier ( choisir dans la liste ): ");
                     int id3 = sc.nextInt();
                     ListeFournisseur.modifierFournisseur(id3);
@@ -259,8 +260,4 @@ public class Main  {
         choix = sc.nextInt();
         return choix;
     }
-
-
-
-
 }
