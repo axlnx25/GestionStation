@@ -4,13 +4,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Stock {
-    public static HashMap<Integer, Carburant> stock;
+    public static HashMap<Integer, Carburant> stock =  new HashMap<>();
     private static double totalValeurStock = 0.0;
     private static double totalQuantiteStock = 0.0;
-
-    public Stock(){
-        stock = new HashMap<>();
-    }
 
     public static HashMap<Integer, Carburant> getStock() {
         return stock;
@@ -21,23 +17,23 @@ public class Stock {
 
     }
 
-    public static double gettotalValeurStock ()  {
+    public double gettotalValeurStock ()  {
         return totalValeurStock;
     }
 
-    public static double gettotalQuantiteStock () {
+    public double gettotalQuantiteStock () {
         return totalQuantiteStock;
     }
 
-    public static void setTotalValeurStock(double totalValeurStock) {
+    public void setTotalValeurStock(double totalValeurStock) {
         Stock.totalValeurStock = totalValeurStock;
     }
 
-    public static void setTotalQuantiteStock(double totalQuantiteStock) {
+    public void setTotalQuantiteStock(double totalQuantiteStock) {
         Stock.totalQuantiteStock = totalQuantiteStock;
     }
 
-    public static void ajouterAuStock(Carburant carburant) {
+    public void ajouterAuStock(Carburant carburant) {
         int cle = carburant.getIdentifiant();
         if (stock.containsKey(cle)) {
             System.out.println("Ce produit existe déjà !!!!");
@@ -49,7 +45,7 @@ public class Stock {
         }
     }
 
-    public static void afficherStock() {
+    public void afficherStock() {
         if (stock.isEmpty()) {
             System.out.println("Stock vide");
         }  else {
@@ -68,7 +64,20 @@ public class Stock {
         }
     }
 
-    public static void supprimerDuStock(int idASupprimer) {
+    public void afficherProduitPourVente() {
+        if (stock.isEmpty()) {
+            System.out.println("Stock vide");
+        } else {
+            System.out.println("Voici la liste des produits du stock :");
+            for (Carburant carburant : stock.values()) {
+                System.out.println("------------------------------------");
+                System.out.println(carburant);
+                System.out.println("------------------------------------");
+            }
+        }
+    }
+
+    public void supprimerDuStock(int idASupprimer) {
         if (stock.containsKey(idASupprimer)) {
             Carburant carburant = stock.get(idASupprimer);
 
@@ -82,7 +91,7 @@ public class Stock {
         }
     }
 
-    public static void supprimerStock() {
+    public void supprimerStock() {
         if (stock.isEmpty()) {
             System.out.println("Stock vide !!!!");
         } else   {
@@ -93,7 +102,7 @@ public class Stock {
     }
 
 //    pour modifier un produit carburant du stock
-    public static void modifierStock(int idModifier) {
+    public void modifierStock(int idModifier) {
         if (stock.isEmpty()) {
             Scanner sc = new Scanner(System.in);
 
@@ -105,16 +114,17 @@ public class Stock {
                 totalQuantiteStock = totalQuantiteStock - carburant.getQuantite();
                 totalValeurStock = totalValeurStock - carburant.getPrix();
 
-                System.out.print("Nouveau identifiant produit: ");
-                carburant.setIdentifiant(sc.nextInt());
                 System.out.print("Nouveau nom produit: ");
                 carburant.setNomCarburant(sc.nextLine());
                 System.out.print("Nouveau prix produit: ");
                 carburant.setPrix(sc.nextDouble());
+                sc.nextLine();
                 System.out.print("Nouveau quantite: ");
                 carburant.setQuantite(sc.nextDouble());
+                sc.nextLine();
                 System.out.print("Nouveau niveau d'alerte: ");
                 carburant.setNiveauAlerte(sc.nextDouble());
+                sc.nextLine();
 
 //                prise en compte de la valeur modifié
                 totalValeurStock = totalValeurStock + carburant.getPrix();
@@ -129,7 +139,7 @@ public class Stock {
         }
     }
 
-    public static void rechercherProduit (int idProduit ) {
+    public void rechercherProduit (int idProduit ) {
         if (!stock.isEmpty()) {
             if (stock.containsKey(idProduit)) {
                 Carburant carburant = stock.get(idProduit);
@@ -143,7 +153,7 @@ public class Stock {
     }
 
     //    obtenir prixUnitaire d'un produit du stock
-    public static double getItemPrice (String itemName) {
+    public double getItemPrice (String itemName) {
         for (Carburant carburant : stock.values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
                 return carburant.getPrix();
@@ -152,7 +162,7 @@ public class Stock {
         return 0.0;
     }
 
-    public static boolean estDansStock (String itemName) {
+    public boolean estDansStock (String itemName) {
         int i = 0;
         for (Carburant carburant : stock.values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
@@ -163,6 +173,24 @@ public class Stock {
             return false;
         } else  {
             return true;
+        }
+    }
+
+    public void vendreProduit (String itemName, double prix, double quantite) {
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+                setTotalValeurStock(totalValeurStock - (prix * quantite));
+                setTotalQuantiteStock(totalQuantiteStock - quantite);
+            }
+        }
+    }
+
+    public void annulerVendreProduit (String itemName, double prix, double quantite) {
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+                setTotalValeurStock(totalValeurStock + prix);
+                setTotalQuantiteStock(totalQuantiteStock + quantite);
+            }
         }
     }
 

@@ -25,6 +25,10 @@ public class ListeApprovisionnement {
         }
     }
 
+    public static int nombreApprovisionnement() {
+        return ListeApprovisionnements.size();
+    }
+
     public static void annulerApprovisionnement() {
         if (ListeApprovisionnements.isEmpty()) {
             System.out.println("Liste d'approvisionnement vide, pas " +
@@ -39,6 +43,7 @@ public class ListeApprovisionnement {
             }
             System.out.print("Entrez identifiant de l'approvisionnement que vous souhaitez supprimer: ");
             int idDeSuppression = sc.nextInt();
+            sc.nextLine();
             int i = 0;
             for (Approvisionnement approvisionnement: ListeApprovisionnements.values()) {
                 if (idDeSuppression == approvisionnement.getIdentifiant()) {

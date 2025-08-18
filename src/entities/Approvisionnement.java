@@ -3,12 +3,14 @@ package entities;
 import java.util.Scanner;
 
 public class Approvisionnement {
+    private static int compteur = 0;
     private int identifiant;
     private String libelle;
     private String date;
     private String nomFournisseur;
     private String nomProduit;
     private double quantitApprovisionne;
+    Stock stock = new Stock();
 
     public void faireApprovisionnement() {
 //        L'approvisionnement ne se fait que quand il y'a au moins un fourniseur
@@ -17,14 +19,14 @@ public class Approvisionnement {
                     "Veuillez ajouter au moins un fournisseur ");
         } else {
             Scanner sc = new Scanner(System.in);
-            System.out.print("Entrez id d'approvisionnement: " );
-            this.identifiant = sc.nextInt();
+            this.identifiant = compteur++;
             System.out.print("Entrez libelle d'approvisionnement: " );
-            this.libelle = sc.next();
+            this.libelle = sc.nextLine();
             System.out.print("Entrez date: " );
-            this.date = sc.next();
+            this.date = sc.nextLine();
             System.out.print("Entrez quantite approvisionée: ");
             this.quantitApprovisionne = sc.nextDouble();
+            sc.nextLine();
 
 //        Pour que l'utilisateur entre un nom de fournisseur dans la liste
             while (true) {
@@ -32,6 +34,7 @@ public class Approvisionnement {
                 System.out.print("Entrez nom du fournisseur ( choisir dans la liste," +
                         " Si elle est vide aller enregistrer un fournisseur ): " );
                 String choisir = sc.next();
+                sc.nextLine();
                 if (ListeFournisseur.estDansLaListeFournisseur(choisir)) {
                     this.nomFournisseur = choisir;
                     break;
@@ -40,10 +43,11 @@ public class Approvisionnement {
 
 //            L'approvisionement est fait pour un produit deja enrgistreé
             while (true) {
-                Stock.afficherStock();
+                stock.afficherStock();
                 System.out.print("Entrez nom produit approvisionner ( choisir dans la liste ): ");
                 String choisir = sc.next();
-                if (Stock.estDansStock(choisir)) {
+                sc.nextLine();
+                if (stock.estDansStock(choisir)) {
                     this.nomProduit = choisir;
                 }
             }
@@ -102,7 +106,7 @@ public class Approvisionnement {
 //    methode qui calcule la valeur prix de l'approvisionnement en cours et la retourne
 //    pour incremanter la valeur prix du stock
     public double valeurApprovisionnementEncours () {
-        return Stock.getItemPrice(this.nomProduit) * this.quantitApprovisionne;
+        return stock.getItemPrice(this.nomProduit) * this.quantitApprovisionne;
     }
 
 //    methode a appeler dans le menu apres nouvelle approvisionnement
@@ -111,10 +115,10 @@ public class Approvisionnement {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                augmenter quantite apres approvisionnement
-                Stock.setTotalQuantiteStock(Stock.gettotalQuantiteStock() +
+                stock.setTotalQuantiteStock(stock.gettotalQuantiteStock() +
                         this.valeurApprovisionnementEncours());
 //                augmenter valeur prix apres approvisionnement
-                Stock.setTotalValeurStock(Stock.gettotalValeurStock() +
+                stock.setTotalValeurStock(stock.gettotalValeurStock() +
                         this.getQuantitApprovisionne());
             }
         }
@@ -125,10 +129,10 @@ public class Approvisionnement {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                soustraire quantite apres annuler approvisionnement
-                Stock.setTotalQuantiteStock(Stock.gettotalQuantiteStock() -
+                stock.setTotalQuantiteStock(stock.gettotalQuantiteStock() -
                         this.valeurApprovisionnementEncours());
 //                soustraire valeur prix apres annuler approvisionnement
-                Stock.setTotalValeurStock(Stock.gettotalValeurStock() -
+                stock.setTotalValeurStock(stock.gettotalValeurStock() -
                         this.getQuantitApprovisionne());
             }
         }

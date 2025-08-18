@@ -15,8 +15,7 @@ public class ListeFournisseur {
         return historiqueFournisseur;
     }
 
-    public static void ajouterAListeFournisseur () {
-        Fournisseur f = new Fournisseur();
+    public static void ajouterAListeFournisseur (Fournisseur f) {
         historiqueFournisseur.put(f.getIdentifiantFournisseur(), f);
     }
 
@@ -26,6 +25,7 @@ public class ListeFournisseur {
         } else {
             if (historiqueFournisseur.containsKey(id)) {
                 historiqueFournisseur.remove(id);
+                System.out.println("Supprimé avec succès ");
             } else  {
                 System.out.println("Ce fournisseur n'existe pas ");
             }
@@ -45,10 +45,9 @@ public class ListeFournisseur {
                 System.out.println(f);
                 System.out.println("-----------------------------------");
 
-                System.out.print("Modifier id fournisseur : ");
-                f.setIdentifiantFournisseur(sc.nextInt());
                 System.out.print("Modifier nom fournisseur : ");
                 f.setNomFournisseur(sc.next());
+                sc.nextLine();
                 System.out.print("Modifier prenom fournisseur : ");
                 f.setPrenomFournisseur(sc.next());
                 System.out.println("Modifier adresse fournisseur : ");
