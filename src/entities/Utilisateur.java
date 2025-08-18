@@ -3,15 +3,21 @@ package entities;
 public class Utilisateur extends Personne {
     private static int compteur = 0; // ID automatique
     private String role;
+    private String motDePasse;
 
-        public Utilisateur(String nom, String prenom, String role) {
+        public Utilisateur(String nom, String prenom, String role, String motDePasse) {
             this.identifiant = ++compteur;
             this.nom = nom;
             this.prenom = prenom;
             this.role = role;
+            this.motDePasse = motDePasse;
         }
 
-        public int getId() {
+    public String getMotDePasse() {
+        return motDePasse;
+    }
+
+    public int getId() {
             return identifiant;
         }
         public String getNom() {
