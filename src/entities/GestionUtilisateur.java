@@ -15,8 +15,9 @@ class GestionUtilisateur {
         String prenom = sc.nextLine();
         System.out.print("Role: ");
         String role = sc.nextLine();
+        String motDePasse = sc.nextLine();
 
-        Utilisateur u = new Utilisateur(nom, prenom, role);
+        Utilisateur u = new Utilisateur(nom, prenom, role, motDePasse);
         utilisateurs.add(u);
         System.out.println(" Utilisateur créé : " + u);
     }
