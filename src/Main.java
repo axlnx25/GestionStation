@@ -4,9 +4,9 @@ import java.util.*;
 public class Main  {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int reponse = 0;
+        int reponse = 1;
 
-    while ( reponse == 0 ) {
+    while ( reponse == 1 ) {
         switch (menuPrincipale()) {
             case 1: menuVente();
                 break;
@@ -21,7 +21,7 @@ public class Main  {
             default:System.out.println("Erreur de choix !");
                 break;
         }
-        System.out.print("Souhaitez vous continuer Oui (0) / Non (1): ");
+        System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
         reponse = sc.nextInt();
         sc.nextLine();
     }
@@ -30,9 +30,10 @@ public class Main  {
 
     public static void menuCaisse () {
         int choix = 0;
+        int reponse = 1;
+        Scanner sc = new Scanner(System.in);
 
-        while (choix == 0) {
-            Scanner sc = new Scanner(System.in);
+        while (reponse == 1) {
             System.out.println("1. LISTE DES ENTREES");
             System.out.println("2. LISTE DES SORTIES");
             System.out.println("3. RECAPITULATIF");
@@ -43,20 +44,19 @@ public class Main  {
             Caisse caisse = new Caisse();
 
             switch (choix) {
-
                 case 1: Caisse.afficherListeDesEntree();
                     break;
                 case 2: Caisse.afficherListeDesSortes();
                     break;
-                case 3: Caisse.recapitulatif();
+                case 3: caisse.recapitulatif();
                     break;
                 case 4: menuPrincipale();
                     break;
                 default:System.out.println("Erreur de choix !");
                     break;
             }
-            System.out.print("Souhaitez vous continuer Oui (0) / Non (1): ");
-            choix = sc.nextInt();
+            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            reponse = sc.nextInt();
             sc.nextLine();
         }
 
@@ -64,9 +64,10 @@ public class Main  {
 
     public static void menuCarburant() {
         int choix = 0;
+        int reponse = 1;
+        Scanner sc = new Scanner(System.in);
 
-        while ( choix == 0 ) {
-            Scanner sc = new Scanner(System.in);
+        while ( reponse == 0 ) {
             System.out.println("1. SAISIR PRODUIT");
             System.out.println("2. SUPPRIMER PRODUIT");
             System.out.println("3. MODIFIER PRODUIT");
@@ -84,13 +85,13 @@ public class Main  {
                 case 1: Carburant item = new Carburant();
                     stock.ajouterAuStock(item);
                     break;
-                case 2: Stock.afficherProduitPourVente();
+                case 2: stock.afficherProduitPourVente();
                     System.out.print("Entrez ID du produit à supprimer ( choisir dans la liste ): ");
                     int id = sc.nextInt();
                     sc.nextLine();
                     stock.supprimerDuStock(id);
                     break;
-                case 3: Stock.afficherProduitPourVente();
+                case 3: stock.afficherProduitPourVente();
                     System.out.print("Entrez ID du produit à modifier ( choisir dans la liste ): ");
                     int id3 = sc.nextInt();
                     sc.nextLine();
@@ -109,8 +110,8 @@ public class Main  {
                     break;
                 default:System.out.println("Erreur de choix !");
             }
-            System.out.print("Souhaitez vous continuer Oui (0) / Non (1): ");
-            choix = sc.nextInt();
+            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            reponse = sc.nextInt();
             sc.nextLine();
         }
 
@@ -118,9 +119,10 @@ public class Main  {
 
     public static void menuFournisseur() {
         int choix = 0;
+        int reponse = 1;
+        Scanner sc = new Scanner(System.in);
 
-        while ( choix == 0 ) {
-            Scanner sc = new Scanner(System.in);
+        while ( reponse == 1 ) {
             System.out.println("1. AJOUTER FOURNISSEUR");
             System.out.println("2. SUPPRIMER FOURNISSEUR");
             System.out.println("3. MODIFIER FOURNISSEUR");
@@ -151,8 +153,8 @@ public class Main  {
                 default:System.out.println("Erreur de choix !");
                     break;
             }
-            System.out.print("Souhaitez vous continuer Oui (0) / Non (1): ");
-            choix = sc.nextInt();
+            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            reponse = sc.nextInt();
             sc.nextLine();
         }
 
@@ -160,9 +162,10 @@ public class Main  {
 
     public static void menuUtilisateur() {
         int choix = 0;
+        int reponse = 1;
+        Scanner sc = new Scanner(System.in);
 
-        while ( choix == 0 ) {
-            Scanner sc = new Scanner(System.in);
+        while ( reponse == 1 ) {
             System.out.println("1. AJOUTER UTILISATEUR");
             System.out.println("2. SUPPRIMER UTILISATEUR");
             System.out.println("3. MODIFIER UTILISATEUR");
@@ -188,7 +191,7 @@ public class Main  {
                 default:System.out.println("Erreur de choix !");
             }
             System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
-            choix = sc.nextInt();
+            reponse = sc.nextInt();
             sc.nextLine();
         }
 
@@ -196,28 +199,35 @@ public class Main  {
 
     public static void menuVente() {
         int choix = 0;
+        int reponse = 1;
         Scanner sc = new Scanner(System.in);
-        System.out.println("1. NOUVELLE VENTE ");
-        System.out.println("2. HISTORIQUE VENTE ");
-        System.out.println("3. ANNULER VENTE ");
-        System.out.println("4. RETOUR");
-        System.out.print("Entrez votre choix: ");
-        choix = sc.nextInt();
-        sc.nextLine();
-        GestionVente vente = new GestionVente();
 
-        switch (choix) {
-            case 1: vente.nouvelleVente();
+        while (reponse == 1) {
+            System.out.println("1. NOUVELLE VENTE ");
+            System.out.println("2. HISTORIQUE VENTE ");
+            System.out.println("3. ANNULER VENTE ");
+            System.out.println("4. RETOUR");
+            System.out.print("Entrez votre choix: ");
+            choix = sc.nextInt();
+            sc.nextLine();
+            GestionVente vente = new GestionVente();
+
+            switch (choix) {
+                case 1: vente.nouvelleVente();
                     break;
-            case 2: vente.historique();
+                case 2: vente.historique();
                     break;
-            case 3: vente.annulerVente();
+                case 3: vente.annulerVente();
                     break;
-            case 4: vente.retour();
+                case 4: vente.retour();
                     menuPrincipale();
                     break;
-            default:System.out.println("Erreur de choix !");
+                default:System.out.println("Erreur de choix !");
                     break;
+            }
+            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            reponse = sc.nextInt();
+            sc.nextLine();
         }
     }
 

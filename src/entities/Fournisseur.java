@@ -60,8 +60,8 @@ public class Fournisseur extends Personne {
 
     public String toString() {
         return "Identifiant Fournisseur: " + this.identifiant +
-                "/nNom Fournisseur: " + this.nom + "/nPreom Fournisseur: " +
-                this.prenom + "/nAdresse Fournisseur: " + this.adresse + "/nTelephone Fournisseur"
+                "\nNom Fournisseur: " + this.nom + "\nPreom Fournisseur: " +
+                this.prenom + "\nAdresse Fournisseur: " + this.adresse + "\nTelephone Fournisseur"
                 + this.telephone ;
     }
 

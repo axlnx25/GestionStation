@@ -10,6 +10,7 @@ public class Approvisionnement {
     private String nomFournisseur;
     private String nomProduit;
     private double quantitApprovisionne;
+    Stock stock = new Stock();
 
     public void faireApprovisionnement() {
 //        L'approvisionnement ne se fait que quand il y'a au moins un fourniseur
@@ -42,11 +43,11 @@ public class Approvisionnement {
 
 //            L'approvisionement est fait pour un produit deja enrgistreé
             while (true) {
-                Stock.afficherStock();
+                stock.afficherStock();
                 System.out.print("Entrez nom produit approvisionner ( choisir dans la liste ): ");
                 String choisir = sc.next();
                 sc.nextLine();
-                if (Stock.estDansStock(choisir)) {
+                if (stock.estDansStock(choisir)) {
                     this.nomProduit = choisir;
                 }
             }
@@ -105,7 +106,7 @@ public class Approvisionnement {
 //    methode qui calcule la valeur prix de l'approvisionnement en cours et la retourne
 //    pour incremanter la valeur prix du stock
     public double valeurApprovisionnementEncours () {
-        return Stock.getItemPrice(this.nomProduit) * this.quantitApprovisionne;
+        return stock.getItemPrice(this.nomProduit) * this.quantitApprovisionne;
     }
 
 //    methode a appeler dans le menu apres nouvelle approvisionnement
@@ -114,10 +115,10 @@ public class Approvisionnement {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                augmenter quantite apres approvisionnement
-                Stock.setTotalQuantiteStock(Stock.gettotalQuantiteStock() +
+                stock.setTotalQuantiteStock(stock.gettotalQuantiteStock() +
                         this.valeurApprovisionnementEncours());
 //                augmenter valeur prix apres approvisionnement
-                Stock.setTotalValeurStock(Stock.gettotalValeurStock() +
+                stock.setTotalValeurStock(stock.gettotalValeurStock() +
                         this.getQuantitApprovisionne());
             }
         }
@@ -128,10 +129,10 @@ public class Approvisionnement {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                soustraire quantite apres annuler approvisionnement
-                Stock.setTotalQuantiteStock(Stock.gettotalQuantiteStock() -
+                stock.setTotalQuantiteStock(stock.gettotalQuantiteStock() -
                         this.valeurApprovisionnementEncours());
 //                soustraire valeur prix apres annuler approvisionnement
-                Stock.setTotalValeurStock(Stock.gettotalValeurStock() -
+                stock.setTotalValeurStock(stock.gettotalValeurStock() -
                         this.getQuantitApprovisionne());
             }
         }

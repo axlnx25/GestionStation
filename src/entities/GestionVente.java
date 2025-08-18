@@ -4,32 +4,38 @@ import java.util.*;
 public class GestionVente {
     private static ArrayList<Vente> ventes = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
+    Stock stock = new Stock();
 
     // 1. Nouvelle vente
     public void nouvelleVente() {
-        Stock.afficherProduitPourVente();
-        String produit;
+        if (stock.getStock().size() < 1) {
+            System.out.println("Le stock n'existe pas veuillez enregistrez un produit ");
+        } else {
+            stock.afficherProduitPourVente();
+            String produit;
 
-        while (true) {
-            System.out.print("Nom du produit ( choisir dans la liste ): ");
-            produit = sc.nextLine();
-            if (Stock.estDansStock(produit)) {
-                break;
+            while (true) {
+                System.out.print("Nom du produit ( choisir dans la liste ): ");
+                produit = sc.nextLine();
+                if (stock.estDansStock(produit)) {
+                    break;
+                }
             }
-        }
 
-        System.out.print("Quantité: ");
-        double qte = sc.nextDouble();
-        sc.nextLine();
-        System.out.print("Prix unitaire: " + Stock.getItemPrice(produit));
-        double prix = Stock.getItemPrice(produit);
+            System.out.print("Quantité: ");
+            double qte = sc.nextDouble();
+            sc.nextLine();
+            System.out.print("Prix unitaire: " + stock.getItemPrice(produit));
+            double prix = stock.getItemPrice(produit);
 
 //        ajuster le stock finacierement et en quantité après la vente
-        Stock.vendreProduit(produit, prix, qte);
+            stock.vendreProduit(produit, prix, qte);
 
-        Vente v = new Vente(produit, qte, prix);
-        ventes.add(v);
-        System.out.println("✅ Vente enregistrée avec succès : " + v);
+            Vente v = new Vente(produit, qte, prix);
+            ventes.add(v);
+            System.out.println("Vente enregistrée avec succès : " + v);
+        }
+
     }
 
     // 2. Historique des ventes
@@ -60,24 +66,26 @@ public class GestionVente {
 
     // 3. Annuler une vente
     public void annulerVente() {
-        historique();
-        System.out.print("Entrez l'ID de la vente à annuler ( choisir un ID dans la liste ): ");
-        int id = sc.nextInt();
-        sc.nextLine();
+        if (!ventes.isEmpty()) {
+            historique();
+            System.out.print("Entrez l'ID de la vente à annuler ( choisir un ID dans la liste ): ");
+            int id = sc.nextInt();
+            sc.nextLine();
 
-        for (Vente v : ventes) {
-            if (v.getId() == id) {
-                if (!v.isAnnule()) {
-                    Stock.annulerVendreProduit(v.getProduit(), v.getTotal(), v.getQuantite());
-                    v.annuler();
-                    System.out.println(" Vente #" + id + " annulée avec succès.");
-                } else {
-                    System.out.println(" Cette vente est déjà annulée.");
+            for (Vente v : ventes) {
+                if (v.getId() == id) {
+                    if (!v.isAnnule()) {
+                        stock.annulerVendreProduit(v.getProduit(), v.getTotal(), v.getQuantite());
+                        v.annuler();
+                        System.out.println(" Vente #" + id + " annulée avec succès.");
+                    } else {
+                        System.out.println(" Cette vente est déjà annulée.");
+                    }
+                    return;
                 }
-                return;
             }
+            System.out.println(" Vente introuvable !");
         }
-        System.out.println(" Vente introuvable !");
     }
 
     public void retour() {

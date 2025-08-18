@@ -3,6 +3,7 @@ package entities;
 public class Caisse {
     private static int totalDesEntree;
     private static int totalDesSortes;
+    Stock stock =  new Stock();
 
     public static void initialisationDesValeurs () {
         totalDesEntree = GestionVente.nombresDeVentes() ;
@@ -17,10 +18,10 @@ public class Caisse {
         ListeApprovisionnement.afficherListeApprovisionnement();
     }
 
-    public static void recapitulatif () {
+    public void recapitulatif () {
         System.out.println("Entrées ( nombre ): " + totalDesEntree);
         System.out.println("Sorties ( nombre ): " + totalDesSortes);
-        double resultat = Stock.gettotalValeurStock() - GestionVente.valeurDesVentes();
+        double resultat = stock.gettotalValeurStock() - GestionVente.valeurDesVentes();
         if (resultat < 0) {
             System.out.println("Vous avez une perte de " + resultat);
         } else  {

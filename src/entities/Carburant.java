@@ -60,7 +60,8 @@ public class Carburant {
     }
 
     public void enregistrerCarburantAuStock () {
-        Stock.ajouterAuStock(this);
+        Stock stock = new Stock();
+        stock.ajouterAuStock(this);
     }
 
     public double getNiveauAlerte() {
@@ -81,8 +82,8 @@ public class Carburant {
     @Override
     public String toString() {
        return "Identifiant: " + this.identifiant +
-                "/nNomCarburant: " + this.nomCarburant + "/nPrix: " +
-                this.prix + "/nNiveau d'alerte" + this.niveauAlerte + "/nQuantite: " + this.quantite ;
+                "\nNomCarburant: " + this.nomCarburant + "\nPrix: " +
+                this.prix + "\nNiveau d'alerte" + this.niveauAlerte + "\nQuantite: " + this.quantite ;
     }
 
 
