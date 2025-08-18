@@ -4,18 +4,18 @@ import java.util.Scanner;
 
 public class Fournisseur extends Personne {
     Scanner sc = new Scanner(System.in);
+    private static int compteur = 0;
 
     public Fournisseur() {
-        System.out.print("Entrez id fournisseur: " );
-        this.identifiant = sc.nextInt();
+        this.identifiant = compteur++;
         System.out.print("Entrez nom fournisseur: " );
-        this.nom = sc.next();
+        this.nom = sc.nextLine();
         System.out.print("Entrez prenom fournisseur: " );
-        this.prenom = sc.next();
+        this.prenom = sc.nextLine();
         System.out.print("Entrez adresse fournisseur: " );
-        this.adresse = sc.next();
+        this.adresse = sc.nextLine();
         System.out.print("Entrez telephone fournisseur: " );
-        this.telephone = sc.next();
+        this.telephone = sc.nextLine();
     }
 
     public int getIdentifiantFournisseur () {

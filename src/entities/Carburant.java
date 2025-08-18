@@ -3,6 +3,7 @@ package entities;
 import java.util.Scanner;
 
 public class Carburant {
+    private static int compteur = 0;
     private int identifiant;
     private String nomCarburant;
     private double prix;
@@ -11,16 +12,19 @@ public class Carburant {
     public Scanner sc = new Scanner (System.in);
 
     public Carburant() {
-        System.out.print("Entrez id du produit: " );
-        this.identifiant = sc.nextInt();
+        this.identifiant = compteur++;
         System.out.print("Entrez nom du produit: " );
         this.nomCarburant = sc.next();
-        System.out.print("Entrez prix du produit: " );
+        sc.nextLine();
+        System.out.print("Entrez prix du produit unitaire: " );
         this.prix = sc.nextDouble();
+        sc.nextLine();
         System.out.print("Entrez quantite du produit: " );
         this.quantite = sc.nextDouble();
+        sc.nextLine();
         System.out.print("Entrez valeur niveau d'alerte :");
         this.niveauAlerte = sc.nextDouble();
+        sc.nextLine();
     }
 
     public int getIdentifiant() {

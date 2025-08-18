@@ -3,6 +3,7 @@ package entities;
 import java.util.Scanner;
 
 public class Approvisionnement {
+    private static int compteur = 0;
     private int identifiant;
     private String libelle;
     private String date;
@@ -17,14 +18,14 @@ public class Approvisionnement {
                     "Veuillez ajouter au moins un fournisseur ");
         } else {
             Scanner sc = new Scanner(System.in);
-            System.out.print("Entrez id d'approvisionnement: " );
-            this.identifiant = sc.nextInt();
+            this.identifiant = compteur++;
             System.out.print("Entrez libelle d'approvisionnement: " );
-            this.libelle = sc.next();
+            this.libelle = sc.nextLine();
             System.out.print("Entrez date: " );
-            this.date = sc.next();
+            this.date = sc.nextLine();
             System.out.print("Entrez quantite approvisionée: ");
             this.quantitApprovisionne = sc.nextDouble();
+            sc.nextLine();
 
 //        Pour que l'utilisateur entre un nom de fournisseur dans la liste
             while (true) {
@@ -32,6 +33,7 @@ public class Approvisionnement {
                 System.out.print("Entrez nom du fournisseur ( choisir dans la liste," +
                         " Si elle est vide aller enregistrer un fournisseur ): " );
                 String choisir = sc.next();
+                sc.nextLine();
                 if (ListeFournisseur.estDansLaListeFournisseur(choisir)) {
                     this.nomFournisseur = choisir;
                     break;
@@ -43,6 +45,7 @@ public class Approvisionnement {
                 Stock.afficherStock();
                 System.out.print("Entrez nom produit approvisionner ( choisir dans la liste ): ");
                 String choisir = sc.next();
+                sc.nextLine();
                 if (Stock.estDansStock(choisir)) {
                     this.nomProduit = choisir;
                 }

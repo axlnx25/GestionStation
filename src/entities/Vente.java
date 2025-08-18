@@ -5,12 +5,12 @@ public class Vente {
     private static int compteur = 0;  // Pour générer des IDs automatiques
     private int id;
     private String produit;
-    private int quantite;
+    private double quantite;
     private double prixUnitaire;
     private Date date;
     private boolean estAnnule;
 
-    public Vente(String produit, int quantite, double prixUnitaire) {
+    public Vente(String produit, double quantite, double prixUnitaire) {
         this.id = ++compteur;
         this.produit = produit;
         this.quantite = quantite;
@@ -24,6 +24,12 @@ public class Vente {
     }
     public double getTotal() {
         return quantite * prixUnitaire;
+    }
+    public String getProduit() {
+        return produit;
+    }
+    public double getQuantite() {
+        return quantite;
     }
     public boolean isAnnule() {
         return estAnnule;

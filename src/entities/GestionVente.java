@@ -7,13 +7,25 @@ public class GestionVente {
 
     // 1. Nouvelle vente
     public void nouvelleVente() {
-        System.out.print("Nom du produit: ");
-        String produit = sc.nextLine();
+        Stock.afficherProduitPourVente();
+        String produit;
+
+        while (true) {
+            System.out.print("Nom du produit ( choisir dans la liste ): ");
+            produit = sc.nextLine();
+            if (Stock.estDansStock(produit)) {
+                break;
+            }
+        }
+
         System.out.print("Quantité: ");
-        int qte = sc.nextInt();
-        System.out.print("Prix unitaire: ");
-        double prix = sc.nextDouble();
+        double qte = sc.nextDouble();
         sc.nextLine();
+        System.out.print("Prix unitaire: " + Stock.getItemPrice(produit));
+        double prix = Stock.getItemPrice(produit);
+
+//        ajuster le stock finacierement et en quantité après la vente
+        Stock.vendreProduit(produit, prix, qte);
 
         Vente v = new Vente(produit, qte, prix);
         ventes.add(v);
@@ -34,13 +46,15 @@ public class GestionVente {
 
     // 3. Annuler une vente
     public void annulerVente() {
-        System.out.print("Entrez l'ID de la vente à annuler: ");
+        historique();
+        System.out.print("Entrez l'ID de la vente à annuler ( choisir un ID dans la liste ): ");
         int id = sc.nextInt();
         sc.nextLine();
 
         for (Vente v : ventes) {
             if (v.getId() == id) {
                 if (!v.isAnnule()) {
+                    Stock.annulerVendreProduit(v.getProduit(), v.getTotal(), v.getQuantite());
                     v.annuler();
                     System.out.println(" Vente #" + id + " annulée avec succès.");
                 } else {
@@ -54,6 +68,16 @@ public class GestionVente {
 
     public void retour() {
         System.out.println(" Retour au menu principal...");
+    }
+
+    public int nombresDeVentes() {
+        int nbVentes = 0;
+        for (Vente v : ventes) {
+            if (!v.isAnnule()) {
+                nbVentes++;
+            }
+        }
+        return nbVentes;
     }
 }
 

@@ -68,6 +68,17 @@ public class Stock {
         }
     }
 
+    public static void afficherProduitPourVente() {
+        if (stock.isEmpty()) {
+            System.out.println("Stock vide");
+        } else {
+            System.out.println("Voici la liste des produits du stock :");
+            for (Carburant carburant : stock.values()) {
+                System.out.println(carburant);
+            }
+        }
+    }
+
     public static void supprimerDuStock(int idASupprimer) {
         if (stock.containsKey(idASupprimer)) {
             Carburant carburant = stock.get(idASupprimer);
@@ -105,16 +116,17 @@ public class Stock {
                 totalQuantiteStock = totalQuantiteStock - carburant.getQuantite();
                 totalValeurStock = totalValeurStock - carburant.getPrix();
 
-                System.out.print("Nouveau identifiant produit: ");
-                carburant.setIdentifiant(sc.nextInt());
                 System.out.print("Nouveau nom produit: ");
                 carburant.setNomCarburant(sc.nextLine());
                 System.out.print("Nouveau prix produit: ");
                 carburant.setPrix(sc.nextDouble());
+                sc.nextLine();
                 System.out.print("Nouveau quantite: ");
                 carburant.setQuantite(sc.nextDouble());
+                sc.nextLine();
                 System.out.print("Nouveau niveau d'alerte: ");
                 carburant.setNiveauAlerte(sc.nextDouble());
+                sc.nextLine();
 
 //                prise en compte de la valeur modifié
                 totalValeurStock = totalValeurStock + carburant.getPrix();
@@ -163,6 +175,24 @@ public class Stock {
             return false;
         } else  {
             return true;
+        }
+    }
+
+    public static void vendreProduit (String itemName, double prix, double quantite) {
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+                setTotalValeurStock(totalValeurStock - (prix * quantite));
+                setTotalQuantiteStock(totalQuantiteStock - quantite);
+            }
+        }
+    }
+
+    public static void annulerVendreProduit (String itemName, double prix, double quantite) {
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+                setTotalValeurStock(totalValeurStock + prix);
+                setTotalQuantiteStock(totalQuantiteStock + quantite);
+            }
         }
     }
 

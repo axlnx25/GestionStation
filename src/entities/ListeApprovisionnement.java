@@ -39,6 +39,7 @@ public class ListeApprovisionnement {
             }
             System.out.print("Entrez identifiant de l'approvisionnement que vous souhaitez supprimer: ");
             int idDeSuppression = sc.nextInt();
+            sc.nextLine();
             int i = 0;
             for (Approvisionnement approvisionnement: ListeApprovisionnements.values()) {
                 if (idDeSuppression == approvisionnement.getIdentifiant()) {
