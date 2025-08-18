@@ -2,7 +2,7 @@ package entities;
 import java.util.*;
 
 public class GestionVente {
-    private ArrayList<Vente> ventes = new ArrayList<>();
+    private static ArrayList<Vente> ventes = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
     // 1. Nouvelle vente
@@ -44,6 +44,20 @@ public class GestionVente {
         }
     }
 
+    public static void ventesValides() {
+        if (ventes.isEmpty()) {
+            System.out.println(" Aucune vente enregistrée.");
+        } else {
+            System.out.println("Liste des entrées :");
+            for (Vente v : ventes) {
+                if (!v.isAnnule()) {
+                    System.out.println(v);
+                }
+            }
+        }
+    }
+
+
     // 3. Annuler une vente
     public void annulerVente() {
         historique();
@@ -70,14 +84,24 @@ public class GestionVente {
         System.out.println(" Retour au menu principal...");
     }
 
-    public int nombresDeVentes() {
+    public static int nombresDeVentes() {
         int nbVentes = 0;
         for (Vente v : ventes) {
-            if (!v.isAnnule()) {
+            if (v.isAnnule()) {
                 nbVentes++;
             }
         }
         return nbVentes;
+    }
+
+    public static double valeurDesVentes() {
+        double resultat = 0;
+        for (Vente v : ventes) {
+            if (v.isAnnule()) {
+                resultat += v.getTotal();
+            }
+        }
+        return resultat;
     }
 }
 

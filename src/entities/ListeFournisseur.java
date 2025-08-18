@@ -15,8 +15,7 @@ public class ListeFournisseur {
         return historiqueFournisseur;
     }
 
-    public static void ajouterAListeFournisseur () {
-        Fournisseur f = new Fournisseur();
+    public static void ajouterAListeFournisseur (Fournisseur f) {
         historiqueFournisseur.put(f.getIdentifiantFournisseur(), f);
     }
 
@@ -26,6 +25,7 @@ public class ListeFournisseur {
         } else {
             if (historiqueFournisseur.containsKey(id)) {
                 historiqueFournisseur.remove(id);
+                System.out.println("Supprimé avec succès ");
             } else  {
                 System.out.println("Ce fournisseur n'existe pas ");
             }

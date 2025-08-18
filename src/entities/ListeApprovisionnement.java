@@ -25,6 +25,10 @@ public class ListeApprovisionnement {
         }
     }
 
+    public static int nombreApprovisionnement() {
+        return ListeApprovisionnements.size();
+    }
+
     public static void annulerApprovisionnement() {
         if (ListeApprovisionnements.isEmpty()) {
             System.out.println("Liste d'approvisionnement vide, pas " +

@@ -3,8 +3,8 @@ package entities;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class GestionUtilisateur {
-    private ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+public class GestionUtilisateur {
+    private static ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
 
     // 1. Créer utilisateur
@@ -30,7 +30,7 @@ class GestionUtilisateur {
         for (Utilisateur u : utilisateurs) {
             if (u.getId() == id) {
                 utilisateurs.remove(u);
-                System.out.println("✅ Utilisateur supprimé !");
+                System.out.println("Utilisateur supprimé !");
                 return;
             }
         }
@@ -57,7 +57,7 @@ class GestionUtilisateur {
                 String role = sc.nextLine();
                 if (!role.isEmpty()) u.setRole(role);
 
-                System.out.println("✅ Utilisateur modifié : " + u);
+                System.out.println("Utilisateur modifié : " + u);
                 return;
             }
         }
@@ -78,7 +78,7 @@ class GestionUtilisateur {
 
         // 5. Retour
         public void retour() {
-            System.out.println("↩️ Retour au menu principal...");
+            System.out.println("Retour au menu principal...");
         }
     }
 
