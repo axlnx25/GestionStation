@@ -8,8 +8,8 @@ public class GestionVente {
 
     // 1. Nouvelle vente
     public void nouvelleVente() {
-        if (stock.getStock().size() < 1) {
-            System.out.println("Le stock n'existe pas veuillez enregistrez un produit ");
+        if (stock.getStockNonSt().isEmpty()) {
+            System.out.println("Le stock vide pas veuillez enregistrez un produit ");
         } else {
             stock.afficherProduitPourVente();
             String produit;
@@ -22,18 +22,30 @@ public class GestionVente {
                 }
             }
 
-            System.out.print("Quantité: ");
-            double qte = sc.nextDouble();
-            sc.nextLine();
-            System.out.print("Prix unitaire: " + stock.getItemPrice(produit));
-            double prix = stock.getItemPrice(produit);
+//            verifier que la vente est possible par la quantite dans le stock
+            if (stock.ventePossible(produit)) {
+                System.out.print("Quantité: ");
+                double qte = sc.nextDouble();
+                sc.nextLine();
+                System.out.print("Prix unitaire: " + stock.getItemPrice(produit));
+                double prix = stock.getItemPrice(produit);
+//                vendre
+                Vente v = new Vente(produit, qte, prix);
+                ventes.add(v);
 
-//        ajuster le stock finacierement et en quantité après la vente
-            stock.vendreProduit(produit, prix, qte);
+//                ajuster le stock finacierement et en quantité après la vente
+                stock.vendreProduit(produit, v.getTotal(), qte);
+//                dimunier le stock du dit produit
+                for (Carburant c : stock.getStockNonSt().values()) {
+                    if (c.getNomCarburant().equalsIgnoreCase(produit)) {
+                        c.setQuantite(c.getQuantite() - qte);
+                    }
+                }
 
-            Vente v = new Vente(produit, qte, prix);
-            ventes.add(v);
-            System.out.println("Vente enregistrée avec succès : " + v);
+                System.out.println("Vente enregistrée avec succès : " + v);
+            } else {
+                System.out.println("Vente impossible ! ( stock insuffisant )");
+            }
         }
 
     }
@@ -107,7 +119,7 @@ public class GestionVente {
     public static double valeurDesVentes() {
         double resultat = 0;
         for (Vente v : ventes) {
-            if (v.isAnnule()) {
+            if (!v.isAnnule()) {
                 resultat += v.getTotal();
             }
         }

@@ -7,29 +7,36 @@ import java.util.Scanner;
 public class ListeApprovisionnement {
     private static Map<Integer, Approvisionnement> ListeApprovisionnements = new HashMap<>();
 
-    public static void ajouterApprovisionnement(Approvisionnement approvisionnement) {
+    public void ajouterApprovisionnement(Approvisionnement approvisionnement) {
         ListeApprovisionnements.put(approvisionnement.getIdentifiant(), approvisionnement);
         System.out.println("Ajouté avec succes ");
     }
 
-    public static void afficherListeApprovisionnement() {
+    public void afficherListeApprovisionnement() {
         if (ListeApprovisionnements.isEmpty()) {
             System.out.println("Liste d'approvisionnement vide !!!!");
         } else {
             System.out.println("Historique des approvisionnements: ");
             for (Approvisionnement approvisionnement: ListeApprovisionnements.values()) {
-                System.out.println("----------------------------------------------");
                 System.out.println(approvisionnement);
                 System.out.println("----------------------------------------------");
             }
         }
     }
 
-    public static int nombreApprovisionnement() {
+    public double valeurHistoriqueApprovisionnement() {
+        double resultat = 0;
+        for (Approvisionnement approvisionnement: ListeApprovisionnements.values()) {
+            resultat = resultat + approvisionnement.valeurApprovisionnementEncours();
+        }
+        return resultat;
+    }
+
+    public int nombreApprovisionnement() {
         return ListeApprovisionnements.size();
     }
 
-    public static void annulerApprovisionnement() {
+    public void annulerApprovisionnement() {
         if (ListeApprovisionnements.isEmpty()) {
             System.out.println("Liste d'approvisionnement vide, pas " +
                     "d'approvisionnement à annuler!!!!");
@@ -37,7 +44,6 @@ public class ListeApprovisionnement {
             Scanner sc = new Scanner(System.in);
             System.out.println("Historique des approvisionnements: ");
             for (Approvisionnement approvisionnement: ListeApprovisionnements.values()) {
-                System.out.println("----------------------------------------------");
                 System.out.println(approvisionnement);
                 System.out.println("----------------------------------------------");
             }
@@ -58,7 +64,7 @@ public class ListeApprovisionnement {
             if (i == 0) {
                 System.out.println("Cet approvisionnement que vous souhaitez supprimer " +
                         "n'est pas dans la liste des approvisionnement !" +
-                        "/nRecommencez l'operation");
+                        "\nRecommencez l'operation");
             } else System.out.printf("Approvisionnement annuler avec succès !!!!");
         }
     }

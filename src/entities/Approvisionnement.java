@@ -49,6 +49,7 @@ public class Approvisionnement {
                 sc.nextLine();
                 if (stock.estDansStock(choisir)) {
                     this.nomProduit = choisir;
+                    break;
                 }
             }
         }
@@ -115,11 +116,15 @@ public class Approvisionnement {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                augmenter quantite apres approvisionnement
-                stock.setTotalQuantiteStock(stock.gettotalQuantiteStock() +
-                        this.valeurApprovisionnementEncours());
+                carburant.setQuantite(carburant.getQuantite() + this.quantitApprovisionne);
+                double quantite = stock.gettotalQuantiteStock() +
+                        this.getQuantitApprovisionne();
+                stock.setTotalQuantiteStock(quantite);
+
 //                augmenter valeur prix apres approvisionnement
-                stock.setTotalValeurStock(stock.gettotalValeurStock() +
-                        this.getQuantitApprovisionne());
+                double valeur = stock.gettotalValeurStock() +
+                        this.valeurApprovisionnementEncours();
+                stock.setTotalValeurStock(valeur);
             }
         }
     }
@@ -129,21 +134,24 @@ public class Approvisionnement {
         for (Carburant carburant : Stock.getStock().values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(this.nomProduit)) {
 //                soustraire quantite apres annuler approvisionnement
-                stock.setTotalQuantiteStock(stock.gettotalQuantiteStock() -
-                        this.valeurApprovisionnementEncours());
+                double quantite = stock.gettotalQuantiteStock() -
+                        this.getQuantitApprovisionne();
+                stock.setTotalQuantiteStock(quantite);
+
 //                soustraire valeur prix apres annuler approvisionnement
-                stock.setTotalValeurStock(stock.gettotalValeurStock() -
-                        this.getQuantitApprovisionne());
+                double valeur = stock.gettotalValeurStock() -
+                        this.valeurApprovisionnementEncours();
+                stock.setTotalValeurStock(valeur);
             }
         }
     }
 
     public String toString () {
-        return "Identifiant d'approvisionnement: " + this.identifiant + "/nLibelle: " + this.libelle
-                + "/nDate: " + this.date + "/nNom du fournisseur: " + this.nomFournisseur
-                + "/nNom du produit approvisionné: " + this.nomProduit
-                + "/nValeur (prix) approvisionnée: " + this.valeurApprovisionnementEncours() +
-                "/nQuantite approvisionnée: " + this.quantitApprovisionne;
+        return "Identifiant d'approvisionnement: " + this.identifiant + "\nLibelle: " + this.libelle
+                + "\nDate: " + this.date + "\nNom du fournisseur: " + this.nomFournisseur
+                + "\nNom du produit approvisionné: " + this.nomProduit
+                + "\nValeur (prix) approvisionnée: " + this.valeurApprovisionnementEncours() +
+                "\nQuantite approvisionnée: " + this.quantitApprovisionne;
     }
 
 

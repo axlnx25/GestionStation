@@ -5,10 +5,14 @@ import java.util.Scanner;
 
 public class Stock {
     public static HashMap<Integer, Carburant> stock =  new HashMap<>();
-    private static double totalValeurStock = 0.0;
+    private static double totalValeurStock = 5000;
     private static double totalQuantiteStock = 0.0;
 
     public static HashMap<Integer, Carburant> getStock() {
+        return stock;
+    }
+
+    public HashMap<Integer, Carburant> getStockNonSt () {
         return stock;
     }
 
@@ -53,12 +57,13 @@ public class Stock {
             for (Carburant carburant : stock.values()) {
 //                avertissement concernant niveau stock / alerte
                 if (carburant.getQuantite() < carburant.getNiveauAlerte()) {
-                    System.out.println("--------------------------------------");
                     System.out.println("Alerte au stock de ce produit !!!!");
                     System.out.println(carburant);
                     System.out.println("--------------------------------------");
+                } else {
+                    System.out.println(carburant);
+                    System.out.println("--------------------------------------");
                 }
-                System.out.println(carburant);
             }
             System.out.println("Total de carburants ( nombre ): " + stock.size());
         }
@@ -179,8 +184,10 @@ public class Stock {
     public void vendreProduit (String itemName, double prix, double quantite) {
         for (Carburant carburant : stock.values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
-                setTotalValeurStock(totalValeurStock - (prix * quantite));
-                setTotalQuantiteStock(totalQuantiteStock - quantite);
+                double valeurTmp = totalValeurStock + prix;
+                double quantiteTmp = totalQuantiteStock - quantite;
+                setTotalValeurStock(valeurTmp);
+                setTotalQuantiteStock(quantiteTmp);
             }
         }
     }
@@ -188,10 +195,23 @@ public class Stock {
     public void annulerVendreProduit (String itemName, double prix, double quantite) {
         for (Carburant carburant : stock.values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
-                setTotalValeurStock(totalValeurStock + prix);
-                setTotalQuantiteStock(totalQuantiteStock + quantite);
+                double quantiteTmp = totalQuantiteStock + quantite;
+                double valeurTmp = totalValeurStock - prix;
+                setTotalValeurStock(valeurTmp);
+                setTotalQuantiteStock(quantiteTmp);
             }
         }
+    }
+
+    public boolean ventePossible (String itemName) {
+        for (Carburant carburant : stock.values()) {
+            if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
+                if(carburant.getQuantite() > 0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
