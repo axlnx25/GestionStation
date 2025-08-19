@@ -9,16 +9,21 @@ public class GestionUtilisateur {
 
     // 1. Créer utilisateur
     public void creerUtilisateur() {
-        System.out.print("Nom: ");
-        String nom = sc.nextLine();
-        System.out.print("Prénom: ");
-        String prenom = sc.nextLine();
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+        System.out.print("Password: ");
+        String password = sc.nextLine();
         System.out.print("Role: ");
         String role = sc.nextLine();
 
-        Utilisateur u = new Utilisateur(nom, prenom, role);
+        Utilisateur u = new Utilisateur(username, password, role);
         utilisateurs.add(u);
         System.out.println(" Utilisateur créé : " + u);
+    }
+
+    public void creerUtilisateur(String username, String password, String role) {
+        Utilisateur u = new Utilisateur(username, password, role);
+        utilisateurs.add(u);
     }
 
     // 2. Supprimer utilisateur
@@ -45,13 +50,13 @@ public class GestionUtilisateur {
 
         for (Utilisateur u : utilisateurs) {
             if (u.getId() == id) {
-                System.out.print("Nouveau nom (" + u.getNom() + "): ");
+                System.out.print("Nouveau username (" + u.getUsername() + "): ");
                 String nom = sc.nextLine();
-                if (!nom.isEmpty()) u.setNom(nom);
+                if (!nom.isEmpty()) u.setUsername(nom);
 
-                System.out.print("Nouveau prénom (" + u.getPrenom() + "): ");
+                System.out.print("Nouveau password (" + u.getPassword() + "): ");
                 String prenom = sc.nextLine();
-                if (!prenom.isEmpty()) u.setPrenom(prenom);
+                if (!prenom.isEmpty()) u.setPassword(prenom);
 
                 System.out.print("Nouveau rôle (" + u.getRole() + "): ");
                 String role = sc.nextLine();
@@ -74,6 +79,10 @@ public class GestionUtilisateur {
                 System.out.println(u);
             }
         }
+    }
+
+    public ArrayList<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
     }
 
         // 5. Retour

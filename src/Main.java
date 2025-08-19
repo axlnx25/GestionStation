@@ -6,17 +6,40 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int reponse = 1;
 
+        GestionUtilisateur defaultUser = new GestionUtilisateur();
+        defaultUser.creerUtilisateur("admin", "12345", "admin");
+
+        Authentification auth = new Authentification();
+        while (true) {
+            System.out.println("\n======== CONNEXION ========");
+            System.out.print("Entrez username : ");
+            String username = sc.nextLine();
+            System.out.print("Entrez password : ");
+            String password = sc.nextLine();
+            if (auth.login(username, password)) {
+                break;
+            }
+        }
+
         while(reponse == 1) {
             switch (menuPrincipale()) {
-                case 1 -> menuVente();
-                case 2 -> menuCaisse();
-                case 3 -> menuCarburant();
-                case 4 -> menuFournisseur();
-                case 5 -> menuUtilisateur();
-                default -> System.out.println("Erreur de choix !");
+                case 1 : menuVente();
+                         break;
+                case 2 : menuCaisse();
+                         break;
+                case 3 : menuCarburant();
+                         break;
+                case 4 : menuFournisseur();
+                         break;
+                case 5 : menuUtilisateur();
+                         break;
+                case 6 : auth.logout();
+                         System.exit(0);
+                         break;
+                default: System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            System.out.print("Souhaitez vous continuer avec le menu Principal ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
         }
@@ -33,7 +56,7 @@ public class Main {
             System.out.println("1. LISTE DES ENTREES");
             System.out.println("2. LISTE DES SORTIES");
             System.out.println("3. RECAPITULATIF");
-            System.out.println("4. RETOUR");
+//            System.out.println("4. RETOUR");
             System.out.print("Entrez votre choix: ");
             choix = sc.nextInt();
             sc.nextLine();
@@ -46,12 +69,12 @@ public class Main {
                 case 3 : caisse.initialisationDesValeurs();
                          caisse.recapitulatif(l.valeurHistoriqueApprovisionnement());
                          break;
-                case 4 : menuPrincipale();
-                         break;
+//                case 4 : menuPrincipale();
+//                         break;
                 default: System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            System.out.print("Souhaitez vous continuer avec le menu Caisse ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -71,13 +94,14 @@ public class Main {
         GestionVente vente = new GestionVente();
 
         while(reponse == 1) {
+            System.out.println("\n============ MENU CARBURANT ============");
             System.out.println("1. SAISIR PRODUIT");
             System.out.println("2. SUPPRIMER PRODUIT");
             System.out.println("3. MODIFIER PRODUIT");
             System.out.println("4. STOCK PRODUIT");
             System.out.println("5. APPROVISIONNEMENT");
             System.out.println("6. ANNULER APPROVISIONNEMENT");
-            System.out.println("7. RETOUR");
+//            System.out.println("7. RETOUR");
             System.out.print("Entrez votre choix: ");
             choix = sc.nextInt();
             sc.nextLine();
@@ -109,14 +133,14 @@ public class Main {
                 case 6: if (GestionVente.getVentes().isEmpty() ) l.annulerApprovisionnement();
                         else System.out.println("Impossible d'annuler approvisionnement car il y'a des ventes");
                     break;
-                case 7:
-                    menuPrincipale();
-                    break;
+//                case 7:
+//                    menuPrincipale();
+//                    break;
                 default:
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            System.out.print("Souhaitez vous continuer avec le menu Carburant ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -132,11 +156,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while(reponse == 1) {
+            System.out.println("\n============ MENU FOURNISSEUR ============");
             System.out.println("1. AJOUTER FOURNISSEUR");
             System.out.println("2. SUPPRIMER FOURNISSEUR");
             System.out.println("3. MODIFIER FOURNISSEUR");
             System.out.println("4. LISTE FOURNISSEUR");
-            System.out.println("5. RETOUR");
+//            System.out.println("5. RETOUR");
             System.out.print("Entrez votre choix: ");
             choix = sc.nextInt();
             sc.nextLine();
@@ -158,14 +183,14 @@ public class Main {
                 case 4:
                     ListeFournisseur.afficherTousLesFournisseurs();
                     break;
-                case 5:
-                    menuPrincipale();
-                    break;
+//                case 5:
+//                    menuPrincipale();
+//                    break;
                 default:
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            System.out.print("Souhaitez vous continuer avec le menu Fournisseur ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -181,11 +206,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while(reponse == 1) {
+            System.out.println("\n============ MENU UTILISATEUR ============");
             System.out.println("1. AJOUTER UTILISATEUR");
             System.out.println("2. SUPPRIMER UTILISATEUR");
             System.out.println("3. MODIFIER UTILISATEUR");
             System.out.println("4. LISTE UTILISATEUR");
-            System.out.println("5. RETOUR");
+//            System.out.println("5. RETOUR");
             System.out.print("Entrez votre choix: ");
             choix = sc.nextInt();
             sc.nextLine();
@@ -211,7 +237,7 @@ public class Main {
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            System.out.print("Souhaitez vous continuer avec le menu Utilisateur ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -227,10 +253,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         while(reponse == 1) {
+            System.out.println("\n============ MENU VENTE ============");
             System.out.println("1. NOUVELLE VENTE ");
             System.out.println("2. HISTORIQUE VENTE ");
             System.out.println("3. ANNULER VENTE ");
-            System.out.println("4. RETOUR");
+//            System.out.println("4. RETOUR");
             System.out.print("Entrez votre choix: ");
             choix = sc.nextInt();
             sc.nextLine();
@@ -253,7 +280,7 @@ public class Main {
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer Oui (1) / Non (0): ");
+            System.out.print("Souhaitez vous continuer avec le menu Vente ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -266,6 +293,7 @@ public class Main {
     public static int menuPrincipale() {
         int choix = 0;
         Scanner sc = new Scanner(System.in);
+        System.out.println("\n============ MENU PRINCIPAL ============");
         System.out.println("1. VENTE / SORTIE ");
         System.out.println("2. CAISSE");
         System.out.println("3. CARBURANT");
