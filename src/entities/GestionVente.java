@@ -6,6 +6,10 @@ public class GestionVente {
     private Scanner sc = new Scanner(System.in);
     Stock stock = new Stock();
 
+    public static ArrayList<Vente> getVentes() {
+        return ventes;
+    }
+
     // 1. Nouvelle vente
     public void nouvelleVente() {
         if (stock.getStockNonSt().isEmpty()) {
@@ -21,13 +25,13 @@ public class GestionVente {
                     break;
                 }
             }
+            System.out.print("Quantité: ");
+            double qte = sc.nextDouble();
+            sc.nextLine();
 
 //            verifier que la vente est possible par la quantite dans le stock
-            if (stock.ventePossible(produit)) {
-                System.out.print("Quantité: ");
-                double qte = sc.nextDouble();
-                sc.nextLine();
-                System.out.print("Prix unitaire: " + stock.getItemPrice(produit));
+            if (stock.ventePossible(produit, qte)) {
+                System.out.println("Prix unitaire: " + stock.getItemPrice(produit));
                 double prix = stock.getItemPrice(produit);
 //                vendre
                 Vente v = new Vente(produit, qte, prix);
@@ -109,7 +113,7 @@ public class GestionVente {
     public static int nombresDeVentes() {
         int nbVentes = 0;
         for (Vente v : ventes) {
-            if (v.isAnnule()) {
+            if (!v.isAnnule()) {
                 nbVentes++;
             }
         }

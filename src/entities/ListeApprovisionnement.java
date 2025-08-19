@@ -63,9 +63,10 @@ public class ListeApprovisionnement {
             }
             if (i == 0) {
                 System.out.println("Cet approvisionnement que vous souhaitez supprimer " +
-                        "n'est pas dans la liste des approvisionnement !" +
+                        "n'est pas dans la liste des approvisionnement ou une vente a déjà été \n réalisée avec ce stock " +
+                        "approvisionné !" +
                         "\nRecommencez l'operation");
-            } else System.out.printf("Approvisionnement annuler avec succès !!!!");
+            } else System.out.println("Approvisionnement annuler avec succès !!!!");
         }
     }
 }

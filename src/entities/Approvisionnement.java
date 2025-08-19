@@ -137,6 +137,7 @@ public class Approvisionnement {
                 double quantite = stock.gettotalQuantiteStock() -
                         this.getQuantitApprovisionne();
                 stock.setTotalQuantiteStock(quantite);
+                carburant.setQuantite(carburant.getQuantite() - this.quantitApprovisionne);
 
 //                soustraire valeur prix apres annuler approvisionnement
                 double valeur = stock.gettotalValeurStock() -

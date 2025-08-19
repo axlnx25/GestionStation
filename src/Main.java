@@ -68,6 +68,7 @@ public class Main {
         Approvisionnement a = new Approvisionnement();
         Stock stock = new Stock();
         ListeApprovisionnement l  = new ListeApprovisionnement();
+        GestionVente vente = new GestionVente();
 
         while(reponse == 1) {
             System.out.println("1. SAISIR PRODUIT");
@@ -105,8 +106,8 @@ public class Main {
                     l.ajouterApprovisionnement(a);
                     a.miseAJourStock();
                     break;
-                case 6:
-                    l.annulerApprovisionnement();
+                case 6: if (GestionVente.getVentes().isEmpty() ) l.annulerApprovisionnement();
+                        else System.out.println("Impossible d'annuler approvisionnement car il y'a des ventes");
                     break;
                 case 7:
                     menuPrincipale();

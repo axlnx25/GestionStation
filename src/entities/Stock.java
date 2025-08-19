@@ -197,16 +197,17 @@ public class Stock {
             if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
                 double quantiteTmp = totalQuantiteStock + quantite;
                 double valeurTmp = totalValeurStock - prix;
+                carburant.setQuantite(carburant.getQuantite() + quantite);
                 setTotalValeurStock(valeurTmp);
                 setTotalQuantiteStock(quantiteTmp);
             }
         }
     }
 
-    public boolean ventePossible (String itemName) {
+    public boolean ventePossible (String itemName, double quantiteAVendre) {
         for (Carburant carburant : stock.values()) {
             if (carburant.getNomCarburant().equalsIgnoreCase(itemName)) {
-                if(carburant.getQuantite() > 0){
+                if((carburant.getQuantite() > 0) && (carburant.getQuantite() > quantiteAVendre)) {
                     return true;
                 }
             }
