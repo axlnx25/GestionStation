@@ -83,7 +83,7 @@ public class Carburant {
     public String toString() {
        return "Identifiant: " + this.identifiant +
                 "\nNomCarburant: " + this.nomCarburant + "\nPrix: " +
-                this.prix + "\nNiveau d'alerte" + this.niveauAlerte + "\nQuantite: " + this.quantite ;
+                this.prix + "\nNiveau d'alerte: " + this.niveauAlerte + "\nQuantite: " + this.quantite ;
     }
 
 

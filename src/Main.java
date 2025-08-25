@@ -74,7 +74,7 @@ public class Main {
                 default: System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer avec le menu Caisse ? Oui (1) / Non (0): ");
+            System.out.print("\nSouhaitez vous continuer avec le menu Caisse ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -140,7 +140,7 @@ public class Main {
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer avec le menu Carburant ? Oui (1) / Non (0): ");
+            System.out.print("\nSouhaitez vous continuer avec le menu Carburant ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -190,7 +190,7 @@ public class Main {
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer avec le menu Fournisseur ? Oui (1) / Non (0): ");
+            System.out.print("\nSouhaitez vous continuer avec le menu Fournisseur ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -237,7 +237,7 @@ public class Main {
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer avec le menu Utilisateur ? Oui (1) / Non (0): ");
+            System.out.print("\nSouhaitez vous continuer avec le menu Utilisateur ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {
@@ -280,7 +280,7 @@ public class Main {
                     System.out.println("Erreur de choix !");
             }
 
-            System.out.print("Souhaitez vous continuer avec le menu Vente ? Oui (1) / Non (0): ");
+            System.out.print("\nSouhaitez vous continuer avec le menu Vente ? Oui (1) / Non (0): ");
             reponse = sc.nextInt();
             sc.nextLine();
             if (reponse == 0) {

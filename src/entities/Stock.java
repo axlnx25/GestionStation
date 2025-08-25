@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Stock {
     public static HashMap<Integer, Carburant> stock =  new HashMap<>();
-    private static double totalValeurStock = 5000;
+    private static double totalValeurStock = 0.0;
     private static double totalQuantiteStock = 0.0;
 
     public static HashMap<Integer, Carburant> getStock() {
@@ -51,9 +51,9 @@ public class Stock {
 
     public void afficherStock() {
         if (stock.isEmpty()) {
-            System.out.println("Stock vide");
+            System.out.println("\nStock vide");
         }  else {
-            System.out.println("Voici la liste des produits du stock :");
+            System.out.println("\nVoici la liste des produits du stock :");
             for (Carburant carburant : stock.values()) {
 //                avertissement concernant niveau stock / alerte
                 if (carburant.getQuantite() < carburant.getNiveauAlerte()) {
@@ -71,9 +71,9 @@ public class Stock {
 
     public void afficherProduitPourVente() {
         if (stock.isEmpty()) {
-            System.out.println("Stock vide");
+            System.out.println("\nStock vide");
         } else {
-            System.out.println("Voici la liste des produits du stock :");
+            System.out.println("\nVoici la liste des produits du stock :\n");
             for (Carburant carburant : stock.values()) {
                 System.out.println("------------------------------------");
                 System.out.println(carburant);
@@ -108,7 +108,7 @@ public class Stock {
 
 //    pour modifier un produit carburant du stock
     public void modifierStock(int idModifier) {
-        if (stock.isEmpty()) {
+        if (!stock.isEmpty()) {
             Scanner sc = new Scanner(System.in);
 
 //            modifier valeur dans le stock d'un produit
