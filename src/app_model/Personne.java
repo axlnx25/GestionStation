@@ -1,4 +1,4 @@
-package entities;
+package app_model;
 
 public class Personne {
     protected int identifiant;

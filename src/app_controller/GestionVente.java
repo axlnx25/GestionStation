@@ -1,4 +1,7 @@
-package entities;
+package app_controller;
+import app_model.Carburant;
+import app_model.Vente;
+
 import java.util.*;
 
 public class GestionVente {

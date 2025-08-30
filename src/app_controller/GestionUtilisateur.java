@@ -1,4 +1,6 @@
-package entities;
+package app_controller;
+
+import app_model.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.Scanner;

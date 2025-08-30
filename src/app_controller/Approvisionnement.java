@@ -1,4 +1,6 @@
-package entities;
+package app_controller;
+
+import app_model.Carburant;
 
 import java.util.Scanner;
 

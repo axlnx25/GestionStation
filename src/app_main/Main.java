@@ -1,4 +1,7 @@
-import entities.*;
+package app_main;
+
+import app_controller.*;
+import app_model.*;
 import java.util.Scanner;
 
 public class Main {

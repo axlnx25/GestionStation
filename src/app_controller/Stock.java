@@ -1,4 +1,6 @@
-package entities;
+package app_controller;
+
+import app_model.Carburant;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -21,6 +23,7 @@ public class Stock {
 
     }
 
+//    notation camel case a prendre en compte en bas
     public double gettotalValeurStock ()  {
         return totalValeurStock;
     }
@@ -38,7 +41,7 @@ public class Stock {
     }
 
     public void ajouterAuStock(Carburant carburant) {
-        int cle = carburant.getIdentifiant();
+        int cle = carburant.getIdentifiant(); //inutile de creer la variable cle
         if (stock.containsKey(cle)) {
             System.out.println("Ce produit existe déjà !!!!");
         }  else {
@@ -124,6 +127,7 @@ public class Stock {
                 System.out.print("Nouveau prix produit: ");
                 carburant.setPrix(sc.nextDouble());
                 sc.nextLine();
+//                inutile pas logique de modifier la quantité
                 System.out.print("Nouveau quantite: ");
                 carburant.setQuantite(sc.nextDouble());
                 sc.nextLine();

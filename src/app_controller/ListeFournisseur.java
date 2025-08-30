@@ -1,4 +1,6 @@
-package entities;
+package app_controller;
+
+import app_model.Fournisseur;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package entities;
+package app_model;
 
 public class Utilisateur extends Personne {
     private static int compteur = 0; // ID automatique

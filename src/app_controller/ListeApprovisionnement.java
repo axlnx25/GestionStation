@@ -1,4 +1,4 @@
-package entities;
+package app_controller;
 
 import java.util.HashMap;
 import java.util.Map;

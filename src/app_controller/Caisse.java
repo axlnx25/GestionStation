@@ -1,4 +1,4 @@
-package entities;
+package app_controller;
 
 public class Caisse {
     private static int totalDesEntree;

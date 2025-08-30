@@ -1,4 +1,4 @@
-package entities;
+package app_model;
 
 import java.util.Scanner;
 

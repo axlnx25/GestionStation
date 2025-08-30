@@ -1,4 +1,6 @@
-package entities;
+package app_model;
+
+import app_controller.Stock;
 
 import java.util.Scanner;
 

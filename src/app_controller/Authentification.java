@@ -1,4 +1,6 @@
-package entities;
+package app_controller;
+
+import app_model.Utilisateur;
 
 public class Authentification {
     private GestionUtilisateur listeUsers = new GestionUtilisateur();
